@@ -1,21 +1,8 @@
-# Maven
+# Build artifacts
 target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.versioning
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-.mvn/wrapper/maven-wrapper.jar
 build/
 dist/
 out/
-
-# Java
-*.class
 *.jar
 *.war
 *.ear
@@ -23,15 +10,10 @@ out/
 *.tar.gz
 *.rar
 *.7z
-hs_err_pid*
-replay_pid*
 
-# Binary files
-*.exe
-*.dll
-*.so
-*.dylib
-*.bin
+# Dependencies
+node_modules/
+package-lock.json
 
 # IDE
 .idea/
@@ -73,9 +55,8 @@ terraform/modules/authorizer/authorizer.zip
 .aws-sam/
 samconfig.toml
 
-# Environment & Credentials
+# SENSITIVE: Environment & Credentials
 .env
-.env.local
 .env.*
 !.env.example
 *.pem
@@ -85,13 +66,21 @@ samconfig.toml
 *.cer
 *.crt
 credentials
-credentials.json
+credentials.*
 secrets.yml
 secrets.yaml
 
-# Test scripts with credentials
+# SENSITIVE: Test scripts with real credentials
 test-api.sh
 scripts/test-api.sh
+
+# SENSITIVE: Client credentials directory (except .gitignore)
+client-credentials/*
+!client-credentials/.gitignore
+
+# SENSITIVE: Deployment outputs may contain sensitive info
+deployment-outputs.txt
+deployment-outputs.json
 
 # Logs
 *.log
@@ -106,4 +95,5 @@ logs/
 Thumbs.db
 
 # Claude session files
+.claude/
 CLAUDE.md
