@@ -56,6 +56,23 @@ resource "aws_cognito_user_pool_domain" "orders_api_domain" {
   user_pool_id = aws_cognito_user_pool.orders_api_pool.id
 }
 
+# Resource server for custom scopes (must be created before client)
+resource "aws_cognito_resource_server" "orders_api_resource_server" {
+  identifier   = "orders-api"
+  name         = "Orders API Resource Server"
+  user_pool_id = aws_cognito_user_pool.orders_api_pool.id
+
+  scope {
+    scope_name        = "read"
+    scope_description = "Read access to orders"
+  }
+
+  scope {
+    scope_name        = "write"
+    scope_description = "Write access to orders"
+  }
+}
+
 resource "aws_cognito_user_pool_client" "orders_api_client" {
   name                                 = var.client_name
   user_pool_id                         = aws_cognito_user_pool.orders_api_pool.id
@@ -92,23 +109,9 @@ resource "aws_cognito_user_pool_client" "orders_api_client" {
   allowed_oauth_scopes                 = ["orders-api/read"]
 
   supported_identity_providers = ["COGNITO"]
-}
 
-# Resource server for custom scopes
-resource "aws_cognito_resource_server" "orders_api_resource_server" {
-  identifier   = "orders-api"
-  name         = "Orders API Resource Server"
-  user_pool_id = aws_cognito_user_pool.orders_api_pool.id
-
-  scope {
-    scope_name        = "read"
-    scope_description = "Read access to orders"
-  }
-
-  scope {
-    scope_name        = "write"
-    scope_description = "Write access to orders"
-  }
+  # Ensure resource server is created first
+  depends_on = [aws_cognito_resource_server.orders_api_resource_server]
 }
 
 # Create a test user (optional, for testing purposes)

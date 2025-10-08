@@ -97,3 +97,6 @@ Thumbs.db
 # Claude session files
 .claude/
 CLAUDE.md
+deployment-credentials.txt
+terraform/tfplan
+test-results.md
