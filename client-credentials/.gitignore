@@ -1,0 +1,9 @@
+# Ignore all credential files
+*.txt
+*.json
+*.env
+*.pem
+*.key
+
+# But track this .gitignore file
+!.gitignore
