@@ -45,6 +45,10 @@ override.tf.json
 *_override.tf.json
 terraform.tfplan
 terraform.tfplan.json
+*.tfplan
+*.tfplan.out
+*terraform-plan.out
+terraform-plan.out
 
 # Lambda Authorizer
 terraform/modules/authorizer/node_modules/
