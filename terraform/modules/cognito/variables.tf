@@ -1,6 +1,17 @@
-variable "user_pool_name" {
-  description = "Name of the Cognito User Pool"
+variable "organization" {
+  description = "Organization name (e.g., tapodam)"
   type        = string
+}
+
+variable "environment" {
+  description = "Environment name (e.g., dev, staging, prod)"
+  type        = string
+}
+
+variable "user_pool_name" {
+  description = "Name of the Cognito User Pool (deprecated, use organization + environment)"
+  type        = string
+  default     = ""
 }
 
 variable "domain_prefix" {

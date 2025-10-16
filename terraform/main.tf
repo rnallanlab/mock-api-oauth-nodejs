@@ -94,18 +94,14 @@ module "ecs_deployment" {
 module "cognito" {
   source = "./modules/cognito"
 
-  user_pool_name   = "${var.project_name}-${var.environment}-pool"
-  domain_prefix    = "${var.project_name}-${var.environment}-${random_string.cognito_domain_suffix.result}"
+  organization     = "tapodam"
+  environment      = var.environment
+  domain_prefix    = "tapodam"
   create_test_user = var.create_test_user
   test_user_email  = var.test_user_email
 
   tags = {
-    Name = "${var.project_name}-cognito"
+    Name         = "${var.project_name}-cognito"
+    Organization = "tapodam"
   }
-}
-
-resource "random_string" "cognito_domain_suffix" {
-  length  = 8
-  special = false
-  upper   = false
 }
